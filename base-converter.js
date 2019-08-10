@@ -7,6 +7,9 @@ function base_converter(nbasefrom, basefrom, baseto) {
 	var i, nbaseten=0;
 	if (basefrom!=10) {
 		var sizenbasefrom = nbasefrom.length;
+		if(basefrom == 1){
+			nbaseten = sizenbasefrom;
+		}else{
 		for (i=0; i<sizenbasefrom; i++) {
 			var mul, mul_ok=-1;
 			for (mul=0; mul<SYMBOLS.length; mul++) {
@@ -27,8 +30,17 @@ function base_converter(nbasefrom, basefrom, baseto) {
 			if (exp==0) nbaseten += mul;
 			else nbaseten += mul*Math.pow(basefrom, exp);
 		}
+	}
 	} else nbaseten = parseInt(nbasefrom);
 	if (baseto!=10) { 
+		if(baseto == 1) {
+			var result = "";
+			var j;
+			for(j = 0; j < nbaseten; j++){
+				result += "1";
+			}	
+			return result;
+	 	} else {
 		var nbaseto = [];
 		while (nbaseten>0) {
 			var mod = nbaseten%baseto;
@@ -40,6 +52,7 @@ function base_converter(nbasefrom, basefrom, baseto) {
 			nbaseten = parseInt(nbaseten/baseto);
 		}
 		return nbaseto.reverse().toString().replace(/,/g, '');
+	}
 	} else {
 		return nbaseten.toString();
 	}

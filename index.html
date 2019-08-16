@@ -3,11 +3,29 @@
   <head>
     <meta charset="utf-8">
     <title>Calculator++</title>
-    <link rel="stylesheet" href="styles.css">
+
+    <link rel="stylesheet" href="bases/styles.css">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
   </head>
+
   <body>
+
+    <!-- Loads the menu -->
+    <div id="menu">
+    </div>
+
+    <script>
+    $(function(){
+      $("#menu").load("menu.html");
+    });
+    </script>
+
+
     <h1>Calculator++</h1>
+    <h2>Base 10</h2>
+    <div id="base" data-value="10"></div>
+
 
     <!-- Embed the actual calculator here -->
     <div class="calculator">
@@ -41,6 +59,9 @@
     <div class="credits">
     <p>Created by: (team name here) </p>
     </div>
+
+
+
   </body>
-  <script src="Calculator.js"></script>
+  <script src="bases/Calculator.js"></script>
 </html>

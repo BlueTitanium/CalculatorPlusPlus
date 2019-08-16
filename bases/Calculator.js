@@ -1,3 +1,65 @@
+// Converts between bases
+function base_converter(nbasefrom, basefrom, baseto) {
+  var SYMBOLS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  if (basefrom<=0 || basefrom>SYMBOLS.length || baseto<=0 || baseto>SYMBOLS.length) {
+    console.log("Base unallowed");
+    return null;
+  }
+  var i, nbaseten=0;
+  if (basefrom!=10) {
+    var sizenbasefrom = nbasefrom.length;
+    if(basefrom == 1){
+      nbaseten = sizenbasefrom;
+    }else{
+    for (i=0; i<sizenbasefrom; i++) {
+      var mul, mul_ok=-1;
+      for (mul=0; mul<SYMBOLS.length; mul++) {
+        if (nbasefrom[i]==SYMBOLS[mul]) {
+          mul_ok = 1;
+          break;
+        }
+      }
+      if (mul>=basefrom) {
+        console.log("Symbol unallowed in basefrom");
+        return null;
+      }
+      if (mul_ok==-1) {
+        console.log("Symbol not found");
+        return null;
+      }
+      var exp = (sizenbasefrom-i-1);  
+      if (exp==0) nbaseten += mul;
+      else nbaseten += mul*Math.pow(basefrom, exp);
+    }
+  }
+  } else nbaseten = parseInt(nbasefrom);
+  if (baseto!=10) { 
+    if(baseto == 1) {
+      var result = "";
+      var j;
+      for(j = 0; j < nbaseten; j++){
+        result += "1";
+      } 
+      return result;
+    } else {
+    var nbaseto = [];
+    while (nbaseten>0) {
+      var mod = nbaseten%baseto;
+      if (mod<0 || mod>=SYMBOLS.length) {
+        console.log("Out of bounds error");
+        return null;
+      }
+      nbaseto.push(SYMBOLS[mod]);
+      nbaseten = parseInt(nbaseten/baseto);
+    }
+    return nbaseto.reverse().toString().replace(/,/g, '');
+  }
+  } else {
+    return nbaseten.toString();
+  }
+  return "0";
+}
+
 const calculator = {
     displayValue: '0',
     firstOperand: null,
@@ -14,6 +76,8 @@ const calculator = {
     } else {
       calculator.displayValue = displayValue === '0' ? digit : displayValue + digit;
     }
+
+    console.log("Calculator: " + calculator);
   }
   
   function inputDecimal(dot) {
@@ -25,10 +89,22 @@ const calculator = {
       calculator.displayValue += dot;
     }
   }
+
+
   
   function handleOperator(nextOperator) {
     const { firstOperand, displayValue, operator } = calculator
-    const inputValue = parseFloat(displayValue);
+
+    // Gets the base of whatever the html page is for
+    var base = document.getElementById('base').getAttribute('data-value');
+
+    //const inputValue = parseFloat(displayValue);
+
+    // Converts inputted stuff into decimal
+    const inputValue = parseFloat(base_converter(displayValue, base, 10));
+    console.log("Operand: " + inputValue);
+    
+
   
     if (operator && calculator.waitingForSecondOperand)  {
       calculator.operator = nextOperator;
@@ -39,17 +115,28 @@ const calculator = {
       calculator.firstOperand = inputValue;
     } else if (operator) {
       const currentValue = firstOperand || 0;
-      const result = performCalculation[operator](currentValue, inputValue);
-  
+
+      var result = performCalculation[operator](currentValue, inputValue);
+      console.log("Result decimal: " + result);
+
+      // Converts result back into the base of whatever the input was
+      result = base_converter(String(result), 10, base);
+      console.log("Result Binary: " + result);
       calculator.displayValue = String(result);
+
       calculator.firstOperand = result;
     }
   
     calculator.waitingForSecondOperand = true;
     calculator.operator = nextOperator;
+
+    console.log("Calculator: " + calculator);
   }
   
   const performCalculation = {
+
+    
+
     '/': (firstOperand, secondOperand) => firstOperand / secondOperand,
   
     '*': (firstOperand, secondOperand) => firstOperand * secondOperand,

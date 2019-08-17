@@ -119,12 +119,14 @@ const calculator = {
       var result = performCalculation[operator](currentValue, inputValue);
       console.log("Result decimal: " + result);
 
+      calculator.firstOperand = result;
+
       // Converts result back into the base of whatever the input was
       result = base_converter(String(result), 10, base);
       console.log("Result Binary: " + result);
       calculator.displayValue = String(result);
 
-      calculator.firstOperand = result;
+
     }
   
     calculator.waitingForSecondOperand = true;

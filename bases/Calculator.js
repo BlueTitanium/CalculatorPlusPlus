@@ -79,7 +79,7 @@ const calculator = {
 
     console.log("Calculator: " + calculator);
   }
-  
+  /*
   function inputDecimal(dot) {
       if (calculator.waitingForSecondOperand === true) return;
     
@@ -88,7 +88,7 @@ const calculator = {
       // Append the decimal point
       calculator.displayValue += dot;
     }
-  }
+  }*/
 
 
   

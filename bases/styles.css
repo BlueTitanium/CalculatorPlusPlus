@@ -4,6 +4,7 @@ h1{
   font-size: 40px;
   text-align: center;
   padding-top: 25px;
+  padding-bottom: 10px;
 }
 
 h2{
@@ -11,6 +12,7 @@ h2{
   font-size: 30px;
   text-align: center;
   padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 p{
@@ -18,6 +20,7 @@ p{
   font-size: 14px;
   text-align: center;
   padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 html {
@@ -65,10 +68,10 @@ li a:hover {
 .calculator {
   border: 1px solid rgb(0, 0, 0);
   border-radius: 5px;
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
   width: 400px;
 }
 

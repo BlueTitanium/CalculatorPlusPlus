@@ -1,6 +1,6 @@
 // Converts between bases
 function base_converter(nbasefrom, basefrom, baseto) {
-  var SYMBOLS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var SYMBOLS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()";
   if (basefrom<=0 || basefrom>SYMBOLS.length || baseto<=0 || baseto>SYMBOLS.length) {
     console.log("Base unallowed");
     return null;
@@ -27,19 +27,19 @@ function base_converter(nbasefrom, basefrom, baseto) {
         console.log("Symbol not found");
         return null;
       }
-      var exp = (sizenbasefrom-i-1);  
+      var exp = (sizenbasefrom-i-1);
       if (exp==0) nbaseten += mul;
       else nbaseten += mul*Math.pow(basefrom, exp);
     }
   }
   } else nbaseten = parseInt(nbasefrom);
-  if (baseto!=10) { 
+  if (baseto!=10) {
     if(baseto == 1) {
       var result = "";
       var j;
       for(j = 0; j < nbaseten; j++){
         result += "1";
-      } 
+      }
       return result;
     } else {
     var nbaseto = [];
@@ -66,10 +66,10 @@ const calculator = {
     waitingForSecondOperand: false,
     operator: null,
   };
-  
+
   function inputDigit(digit) {
     const { displayValue, waitingForSecondOperand } = calculator;
-  
+
     if (waitingForSecondOperand === true) {
       calculator.displayValue = digit;
       calculator.waitingForSecondOperand = false;
@@ -79,10 +79,10 @@ const calculator = {
 
     console.log("Calculator: " + calculator);
   }
-  
+
   function inputDecimal(dot) {
       if (calculator.waitingForSecondOperand === true) return;
-    
+
     // If the `displayValue` does not contain a decimal point
     if (!calculator.displayValue.includes(dot)) {
       // Append the decimal point
@@ -91,7 +91,7 @@ const calculator = {
   }
 
 
-  
+
   function handleOperator(nextOperator) {
     const { firstOperand, displayValue, operator } = calculator
 
@@ -103,14 +103,14 @@ const calculator = {
     // Converts inputted stuff into decimal
     const inputValue = parseFloat(base_converter(displayValue, base, 10));
     console.log("Operand: " + inputValue);
-    
 
-  
+
+
     if (operator && calculator.waitingForSecondOperand)  {
       calculator.operator = nextOperator;
       return;
     }
-  
+
     if (firstOperand == null) {
       calculator.firstOperand = inputValue;
     } else if (operator) {
@@ -126,67 +126,67 @@ const calculator = {
 
       calculator.firstOperand = result;
     }
-  
+
     calculator.waitingForSecondOperand = true;
     calculator.operator = nextOperator;
 
     console.log("Calculator: " + calculator);
   }
-  
+
   const performCalculation = {
 
-    
+
 
     '/': (firstOperand, secondOperand) => firstOperand / secondOperand,
-  
+
     '*': (firstOperand, secondOperand) => firstOperand * secondOperand,
-  
+
     '+': (firstOperand, secondOperand) => firstOperand + secondOperand,
-  
+
     '-': (firstOperand, secondOperand) => firstOperand - secondOperand,
-  
+
     '=': (firstOperand, secondOperand) => secondOperand
   };
-  
+
   function resetCalculator() {
     calculator.displayValue = '0';
     calculator.firstOperand = null;
     calculator.waitingForSecondOperand = false;
     calculator.operator = null;
   }
-  
+
   function updateDisplay() {
     const display = document.querySelector('.calculator-screen');
     display.value = calculator.displayValue;
   }
-  
+
   updateDisplay();
-  
+
   const keys = document.querySelector('.calculator-keys');
   keys.addEventListener('click', (event) => {
     const { target } = event;
     if (!target.matches('button')) {
       return;
     }
-  
+
     if (target.classList.contains('operator')) {
       handleOperator(target.value);
           updateDisplay();
       return;
     }
-  
+
     if (target.classList.contains('decimal')) {
       inputDecimal(target.value);
           updateDisplay();
       return;
     }
-  
+
     if (target.classList.contains('all-clear')) {
       resetCalculator();
           updateDisplay();
       return;
     }
-  
+
     inputDigit(target.value);
     updateDisplay();
   });

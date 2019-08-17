@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Calculator++</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+  </head>
+  <body>
+        <!-- Loads the menu -->
+    <div id="menu">
+    </div>
+
+    <script>
+    $(function(){
+      $("#menu").load("/menu.html");
+    });
+    </script>
+
+    <h1>Calculator++</h1>
+
+<h2>Base 71</h2>
+<div id="base" data-value="71"></div>
+    <!-- Embed the actual calculator here -->
+    <div class="calculator">
+
+      <input type="text" class="calculator-screen" value="" disabled />
+
+
+      <div class="calculator-keys">
+        <!--operators-->
+        <button type="button" class="operator" value="+">+</button>
+        <button type="button" class="operator" value="-">-</button>
+        <button type="button" class="operator" value="*">&times;</button>
+        <button type="button" class="operator" value="/">&divide;</button>
+        <!--numerals-->
+        <button type="button" value="7">7</button>
+        <button type="button" value="8">8</button>
+        <button type="button" value="9">9</button>
+        <button type="button" value="4">4</button>
+        <button type="button" value="5">5</button>
+        <button type="button" value="6">6</button>
+        <button type="button" value="1">1</button>
+        <button type="button" value="2">2</button>
+        <button type="button" value="3">3</button>
+        <button type="button" value="0">0</button>
+
+<button type="button" value="10">A</button>
+
+<button type="button" value="11">B</button>
+
+<button type="button" value="12">C</button>
+
+<button type="button" value="13">D</button>
+
+<button type="button" value="14">E</button>
+
+<button type="button" value="15">F</button>
+
+<button type="button" value="16">G</button>
+
+<button type="button" value="17">H</button>
+
+<button type="button" value="18">I</button>
+
+<button type="button" value="19">J</button>
+
+<button type="button" value="20">K</button>
+
+<button type="button" value="21">L</button>
+
+<button type="button" value="22">M</button>
+
+<button type="button" value="23">N</button>
+
+<button type="button" value="24">O</button>
+
+<button type="button" value="25">P</button>
+
+<button type="button" value="26">Q</button>
+
+<button type="button" value="27">R</button>
+
+<button type="button" value="28">S</button>
+
+<button type="button" value="29">T</button>
+
+<button type="button" value="30">U</button>
+
+<button type="button" value="31">V</button>
+
+<button type="button" value="32">W</button>
+
+<button type="button" value="33">X</button>
+
+<button type="button" value="34">Y</button>
+
+<button type="button" value="35">Z</button>
+
+<button type="button" value="36">a</button>
+
+<button type="button" value="37">b</button>
+
+<button type="button" value="38">c</button>
+
+<button type="button" value="39">d</button>
+
+<button type="button" value="40">e</button>
+
+<button type="button" value="41">f</button>
+
+<button type="button" value="42">g</button>
+
+<button type="button" value="43">h</button>
+
+<button type="button" value="44">i</button>
+
+<button type="button" value="45">j</button>
+
+<button type="button" value="46">k</button>
+
+<button type="button" value="47">l</button>
+
+<button type="button" value="48">m</button>
+
+<button type="button" value="49">n</button>
+
+<button type="button" value="50">o</button>
+
+<button type="button" value="51">p</button>
+
+<button type="button" value="52">q</button>
+
+<button type="button" value="53">r</button>
+
+<button type="button" value="54">s</button>
+
+<button type="button" value="55">t</button>
+
+<button type="button" value="56">u</button>
+
+<button type="button" value="57">v</button>
+
+<button type="button" value="58">w</button>
+
+<button type="button" value="59">x</button>
+
+<button type="button" value="60">y</button>
+
+<button type="button" value="61">z</button>
+
+<button type="button" value="62">!</button>
+
+<button type="button" value="63">@</button>
+
+<button type="button" value="64">#</button>
+
+<button type="button" value="65">$</button>
+
+<button type="button" value="66">%</button>
+
+<button type="button" value="67">^</button>
+
+<button type="button" value="68">&</button>
+
+<button type="button" value="69">*</button>
+
+<button type="button" value="70">(</button>
+        <!--other buttons-->
+        <button type="button" class="all-clear" value="all-clear">AC</button>
+        <button type="button" class="equal-sign operator" value="=">=</button>
+      </div>
+    </div>
+    <div class="credits">
+    <p>Created by: (team name here) </p>
+    </div>
+  </body>
+  <script src="Calculator.js"></script>
+</html>

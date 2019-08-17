@@ -1,5 +1,5 @@
 function base_converter(nbasefrom, basefrom, baseto) {
-	var SYMBOLS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	var SYMBOLS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()";
 	if (basefrom<=0 || basefrom>SYMBOLS.length || baseto<=0 || baseto>SYMBOLS.length) {
 		console.log("Base unallowed");
 		return null;
@@ -26,19 +26,19 @@ function base_converter(nbasefrom, basefrom, baseto) {
 				console.log("Symbol not found");
 				return null;
 			}
-			var exp = (sizenbasefrom-i-1);	
+			var exp = (sizenbasefrom-i-1);
 			if (exp==0) nbaseten += mul;
 			else nbaseten += mul*Math.pow(basefrom, exp);
 		}
 	}
 	} else nbaseten = parseInt(nbasefrom);
-	if (baseto!=10) { 
+	if (baseto!=10) {
 		if(baseto == 1) {
 			var result = "";
 			var j;
 			for(j = 0; j < nbaseten; j++){
 				result += "1";
-			}	
+			}
 			return result;
 	 	} else {
 		var nbaseto = [];

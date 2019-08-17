@@ -4,11 +4,24 @@
     <meta charset="utf-8">
     <title>Calculator++</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
   </head>
   <body>
+        <!-- Loads the menu -->
+    <div id="menu">
+    </div>
+
+    <script>
+    $(function(){
+      $("#menu").load("/menu.html");
+    });
+    </script>
+
     <h1>Calculator++</h1>
 
+<h2>Base 31</h2>
+<div id="base" data-value="31"></div>
     <!-- Embed the actual calculator here -->
     <div class="calculator">
 
@@ -32,6 +45,28 @@
         <button type="button" value="2">2</button>
         <button type="button" value="3">3</button>
         <button type="button" value="0">0</button>
+
+				<button type="button" value="A">A</button>
+				<button type="button" value="B">B</button>
+				<button type="button" value="C">C</button>
+				<button type="button" value="D">D</button>
+				<button type="button" value="E">E</button>
+				<button type="button" value="F">F</button>
+				<button type="button" value="G">G</button>
+				<button type="button" value="H">H</button>
+				<button type="button" value="I">I</button>
+				<button type="button" value="J">J</button>
+				<button type="button" value="K">K</button>
+				<button type="button" value="L">L</button>
+				<button type="button" value="M">M</button>
+				<button type="button" value="N">N</button>
+				<button type="button" value="O">O</button>
+				<button type="button" value="P">P</button>
+				<button type="button" value="Q">Q</button>
+				<button type="button" value="R">R</button>
+				<button type="button" value="S">S</button>
+				<button type="button" value="T">T</button>
+				<button type="button" value="U">U</button>
         <!--other buttons-->
         
         <button type="button" class="all-clear" value="all-clear">AC</button>

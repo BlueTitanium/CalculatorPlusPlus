@@ -4,10 +4,25 @@
     <meta charset="utf-8">
     <title>Calculator++</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
   </head>
   <body>
+    
+    <!-- Loads the menu -->
+    <div id="menu">
+    </div>
+
+    <script>
+    $(function(){
+      $("#menu").load("/menu.html");
+    });
+    </script>
+
+
     <h1>Calculator++</h1>
+    <h2>Base 1</h2>
+    <div id="base" data-value="1"></div>
 
     <!-- Embed the actual calculator here -->
     <div class="calculator">
@@ -24,7 +39,6 @@
         <!--numerals-->
         <button type="button" value="1">1</button>
         <!--other buttons-->
-        <button type="button" class="decimal" value=".">.</button>
         <button type="button" class="all-clear" value="all-clear">AC</button>
         <button type="button" class="equal-sign operator" value="=">=</button>
       </div>

@@ -1,7 +1,7 @@
 import os
 import re
 
-base = 16
+base = 24
 new_code = ""
 symbols = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()"
 with open("beginning.html", 'r') as file_object:
@@ -22,10 +22,10 @@ with open("base5.html", 'r') as file:
                     new_code += line
                 if value == 0 and base > 10:
                     for i in range(base-10):
-                        new_code += "\n<button type=\"button\" value=\"" + str(10 +i) + "\">" + symbols[10+i] + "</button>"
-                        new_code += "\n"
+                        new_code += "\n\t\t\t\t<button type=\"button\" value=\"" + str(10 +i) + "\">" + symbols[10+i] + "</button>"
+                    new_code += "\n"
             elif re.findall("class=\"decimal\"", line) == []:
                 new_code += line
 
-with open("new16.html", 'w') as newFile:
+with open("new24.html", 'w') as newFile:
     newFile.write(new_code)

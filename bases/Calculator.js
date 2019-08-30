@@ -1,13 +1,39 @@
+//concerts unicode string higher than FFFF to UTF16
+function toUTF16(codePoint) {
+  var TEN_BITS = parseInt('1111111111', 2);
+  function u(codeUnit) {
+    return '\\u'+codeUnit.toString(16).toUpperCase();
+  }
+
+  if (codePoint <= 0xFFFF) {
+    return u(codePoint);
+  }
+  codePoint -= 0x10000;
+
+  // Shift right to get to most significant 10 bits
+  var leadSurrogate = 0xD800 + (codePoint >> 10);
+
+  // Mask to get least significant 10 bits
+  var tailSurrogate = 0xDC00 + (codePoint & TEN_BITS);
+
+  return u(leadSurrogate) + u(tailSurrogate);
+}
+
+
 // Converts between bases
 function base_converter(nbasefrom, basefrom, baseto) {
-  var SYMBOLS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  // Symbols that we use for the bases
+  var SYMBOLS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&";
   if (basefrom<=0 || basefrom>SYMBOLS.length || baseto<=0 || baseto>SYMBOLS.length) {
     console.log("Base unallowed");
     return null;
   }
   var i, nbaseten=0;
+  //if the original base is not 10, execute the following code to convert it into base 10
+  //else just parse the string into an integer
   if (basefrom!=10) {
     var sizenbasefrom = nbasefrom.length;
+    //Special case: if base is 1 just take the size of the string to get the number
     if(basefrom == 1){
       nbaseten = sizenbasefrom;
     }else{
@@ -27,19 +53,23 @@ function base_converter(nbasefrom, basefrom, baseto) {
         console.log("Symbol not found");
         return null;
       }
-      var exp = (sizenbasefrom-i-1);  
+      var exp = (sizenbasefrom-i-1);
       if (exp==0) nbaseten += mul;
       else nbaseten += mul*Math.pow(basefrom, exp);
     }
   }
   } else nbaseten = parseInt(nbasefrom);
-  if (baseto!=10) { 
+  //if the base that the number is getting converted into is not 10, execute the following code to
+  //correctly print out a string corresponding with the numbered base
+  //else just print out the string representation of the number in base 10
+  if (baseto!=10) {
+    //Special case: if base is 1 just keep it in tally marks or just 1
     if(baseto == 1) {
       var result = "";
       var j;
       for(j = 0; j < nbaseten; j++){
         result += "1";
-      } 
+      }
       return result;
     } else {
     var nbaseto = [];
@@ -59,17 +89,17 @@ function base_converter(nbasefrom, basefrom, baseto) {
   }
   return "0";
 }
-
+//handles all calculations inside of the calculator
 const calculator = {
     displayValue: '0',
     firstOperand: null,
     waitingForSecondOperand: false,
     operator: null,
   };
-  
+  //handles the input of each digit
   function inputDigit(digit) {
     const { displayValue, waitingForSecondOperand } = calculator;
-  
+
     if (waitingForSecondOperand === true) {
       calculator.displayValue = digit;
       calculator.waitingForSecondOperand = false;
@@ -79,19 +109,7 @@ const calculator = {
 
     console.log("Calculator: " + calculator);
   }
-  /*
-  function inputDecimal(dot) {
-      if (calculator.waitingForSecondOperand === true) return;
-    
-    // If the `displayValue` does not contain a decimal point
-    if (!calculator.displayValue.includes(dot)) {
-      // Append the decimal point
-      calculator.displayValue += dot;
-    }
-  }*/
 
-
-  
   function handleOperator(nextOperator) {
     const { firstOperand, displayValue, operator } = calculator
 
@@ -103,14 +121,14 @@ const calculator = {
     // Converts inputted stuff into decimal
     const inputValue = parseFloat(base_converter(displayValue, base, 10));
     console.log("Operand: " + inputValue);
-    
 
-  
+
+
     if (operator && calculator.waitingForSecondOperand)  {
       calculator.operator = nextOperator;
       return;
     }
-  
+
     if (firstOperand == null) {
       calculator.firstOperand = inputValue;
     } else if (operator) {
@@ -128,67 +146,62 @@ const calculator = {
 
 
     }
-  
+
     calculator.waitingForSecondOperand = true;
     calculator.operator = nextOperator;
 
     console.log("Calculator: " + calculator);
   }
-  
+
+
   const performCalculation = {
 
-    
-
     '/': (firstOperand, secondOperand) => firstOperand / secondOperand,
-  
+
     '*': (firstOperand, secondOperand) => firstOperand * secondOperand,
-  
+
     '+': (firstOperand, secondOperand) => firstOperand + secondOperand,
-  
+
     '-': (firstOperand, secondOperand) => firstOperand - secondOperand,
-  
+
     '=': (firstOperand, secondOperand) => secondOperand
   };
-  
+
+  //resets the calculator
   function resetCalculator() {
     calculator.displayValue = '0';
     calculator.firstOperand = null;
     calculator.waitingForSecondOperand = false;
     calculator.operator = null;
   }
-  
+
+  //Updates the display on call whenever the calculator display value is adjusted
   function updateDisplay() {
     const display = document.querySelector('.calculator-screen');
     display.value = calculator.displayValue;
   }
-  
+
   updateDisplay();
-  
+  //Creates event listeners for each button on the html page
   const keys = document.querySelector('.calculator-keys');
   keys.addEventListener('click', (event) => {
     const { target } = event;
     if (!target.matches('button')) {
       return;
     }
-  
+
     if (target.classList.contains('operator')) {
       handleOperator(target.value);
           updateDisplay();
       return;
     }
-  
-    if (target.classList.contains('decimal')) {
-      inputDecimal(target.value);
-          updateDisplay();
-      return;
-    }
-  
+
     if (target.classList.contains('all-clear')) {
       resetCalculator();
           updateDisplay();
       return;
     }
-  
+
     inputDigit(target.value);
     updateDisplay();
   });

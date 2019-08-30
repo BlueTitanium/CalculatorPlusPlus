@@ -1,5 +1,5 @@
 # Calculator++
-It is an over engineered calculator for the /r/programmerhumor hackathon.
+It is an over engineered calculator for the /r/programmerhumor hackathon. It can calculate up to 69 bases, which can be accessed through the menu.
 
 ## Instructions
 Run ```python -m SimpleHTTPServer``` to launch a simple http server.

@@ -60,6 +60,20 @@ li a:hover {
   background-color: #111;
 }
 
+.home{
+  color: white;
+  background-color: black;
+  text-align: center;
+  padding: 14px 16px;
+  font-family: monospace;
+  font-size: large;
+
+}
+
+.home:hover{
+  background-color: #333;
+}
+
 .active {
   background-color: #4CAF50;
 }
